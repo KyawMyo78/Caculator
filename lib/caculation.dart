@@ -1,72 +1,33 @@
-double number;
-String e2m(String input) {
-  const english = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-  ];
-  const myanmar = [
-    "၀",
-    "၁",
-    "၂",
-    "၃",
-    "၄",
-    "၅",
-    "၆",
-    "၇",
-    "၈",
-    "၉",
-  ];
+import 'package:math_expressions/math_expressions.dart';
 
-  for (int i = 0; i < english.length; i++) {
-    input = input.replaceAll(myanmar[i], english[i]);
-  }
-  return input;
-}
+Map<String, String> m2e = {
+  "၀": "0",
+  "၁": "1",
+  "၂": "2",
+  "၃": "3",
+  "၄": "4",
+  "၅": "5",
+  "၆": "6",
+  "၇": "7",
+  "၈": "8",
+  "၉": "9",
+};
 
-String m2e(String input) {
-  const english = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-  ];
-  const myanmar = [
-    "၀",
-    "၁",
-    "၂",
-    "၃",
-    "၄",
-    "၅",
-    "၆",
-    "၇",
-    "၈",
-    "၉",
-  ];
+Map<String, String> e2m = {
+  "0": "၀",
+  "1": "၁",
+  "2": "၂",
+  "3": "၃",
+  "4": "၄",
+  "5": "၅",
+  "6": "၆",
+  "7": "၇",
+  "8": "၈",
+  "9": "၉",
+};
 
-  for (int i = 0; i < english.length; i++) {
-    input = input.replaceAll(english[i], myanmar[i]);
-  }
-  return input;
-}
-
-void setNumber(double num) {
-  number = num;
-}
-
-String getNumber() {
-  return number.toString();
+void evaluateEquation(String equation) {
+  Parser p = Parser();
+  Expression exp = p.parse("$equation");
+  print(exp);
 }
