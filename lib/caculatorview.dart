@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:caculator/caculation.dart';
 
@@ -8,8 +10,11 @@ class CaculatorView extends StatefulWidget {
 
 class _CaculatorViewState extends State<CaculatorView> {
   String displayAns = "";
-  String equation = "";
   String answer = "";
+  String orphand = "";
+  bool isOprtPressed = false;
+  double fNum = 0.0;
+  double sNum = 0.0;
 
   Widget button(String a) {
     return FlatButton(
@@ -26,11 +31,15 @@ class _CaculatorViewState extends State<CaculatorView> {
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
       onPressed: () {
+        String engNum = m2e[a];
+        if (isOprtPressed == false) {
+          fNum = fNum + double.parse(engNum);
+        } else {
+          sNum = sNum + double.parse(engNum);
+          isOprtPressed = false;
+        }
         setState(() {
-          String engNum = m2e[a];
-          print(engNum);
           displayAns = displayAns + a;
-          print(displayAns);
         });
       },
     );
@@ -71,10 +80,34 @@ class _CaculatorViewState extends State<CaculatorView> {
       ),
       onPressed: () {
         if (a == "AC") {
-          equation = "";
-          displayAns = "";
+          setState(() {
+            displayAns = "";
+            answer = "";
+            orphand = "";
+            isOprtPressed = false;
+            fNum = 0.0;
+            sNum = 0.0;
+          });
           print("cleared");
         } else {
+          print(fNum);
+          print(sNum);
+          print(orphand);
+          if (orphand == "+") {
+            answer = add(fNum, sNum).toString();
+          } else if (orphand == "-") {
+            answer = minus(fNum, sNum).toString();
+          } else if (orphand == "x") {
+            answer = multiply(fNum, sNum).toString();
+          } else if (orphand == "÷") {
+            answer = divide(fNum, sNum).toString();
+          }
+          print(answer);
+          List<String> _ans = [answer];
+          for (int i = 0; i <= answer.length; i++) {
+            answer = answer + e2m[_ans[i]];
+          }
+          print(answer);
           setState(() {
             displayAns = answer;
           });
@@ -83,7 +116,7 @@ class _CaculatorViewState extends State<CaculatorView> {
     );
   }
 
-  Widget opratorButton(String a) {
+  Widget opratorButton(String oprt) {
     return FlatButton(
       color: Colors.amber,
       height: 70,
@@ -94,10 +127,16 @@ class _CaculatorViewState extends State<CaculatorView> {
         ),
       ),
       child: Text(
-        a,
+        oprt,
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
-      onPressed: () {},
+      onPressed: () {
+        isOprtPressed = true;
+        orphand = oprt;
+        setState(() {
+          displayAns = displayAns + oprt;
+        });
+      },
     );
   }
 

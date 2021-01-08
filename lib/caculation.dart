@@ -26,8 +26,22 @@ Map<String, String> e2m = {
   "9": "၉",
 };
 
-void evaluateEquation(String equation) {
-  Parser p = Parser();
-  Expression exp = p.parse("$equation");
-  print(exp);
+double add(double num1, double num2) {
+  double ans = num1 + num2;
+  return ans;
+}
+
+double minus(double num1, double num2) {
+  double ans = num1 - num2;
+  return ans;
+}
+
+double multiply(double num1, double num2) {
+  double ans = num1 * num2;
+  return ans;
+}
+
+double divide(double num1, double num2) {
+  double ans = num1 / num2;
+  return ans;
 }
