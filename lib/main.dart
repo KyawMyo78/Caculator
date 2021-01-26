@@ -9,10 +9,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Caculator',
-      theme: new ThemeData(
-        fontFamily: 'Pyidaungsu',
-        primarySwatch: Colors.blue,
-      ),
+      theme: new ThemeData.dark(),
       home: CaculatorView(),
     );
   }
